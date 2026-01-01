@@ -25,12 +25,13 @@ int	main(int ac, char **av)
 	if (is_sorted(a, 1))
 		return (ft_lstclear(&a, free), 0);
 	b = NULL;
-	if (sort(&b, &a) == 1)
+	if (sort(&a, &b) == 1)
 	{
 		double_free(&a, &b);
 		ft_putendl_fd("Error", 2);
 		return (1);
 	}
+	if (is_sorted(a, 1)) ft_putendl_fd("a is sorted", 1);
 	double_free(&a, &b);
 	return (0);
 }

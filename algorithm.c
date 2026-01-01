@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	sort(t_list **b, t_list **a)
+int	sofrt(t_list **b, t_list **a)
 {
 	if (ft_lstsize(*a) == 2 && !is_sorted(*a, 1))
 		return (swap(a, 0), 0);
@@ -34,6 +34,46 @@ int	sort(t_list **b, t_list **a)
 	if (find_cheapest(a, b) == 1)
 		return (1);
 	return (sort(b, a));
+}
+
+int	sort(t_list **a, t_list **b)
+{
+	if (ft_lstsize(*a) == 3)
+	{
+		sort_three(a);
+		return 0l;
+	}
+	if (!*b)
+	{
+		push(b, a, 1);
+		if (ft_lstsize(*a) == 3)
+		{
+			sort_three(a);
+			push_back(a, b);
+			return 0;
+		}
+		push(b, a, 1);
+		if (!is_sorted(*b, 0) &&  is_end(*b, *(int *)(*a)->content))
+			rotate(b, 1);
+	}
+	while (1)
+	{
+		if (ft_lstsize(*a) == 2 && !is_sorted(*a, 1))
+		{
+			swap(a, 0);
+			break;
+		}
+		if (ft_lstsize(*a) == 3)
+			sort_three(a);
+		if (is_sorted(*a, 1))
+		{
+			push_back(a, b);
+			break;
+		}
+		if (find_cheapest(a, b))
+			return 1;
+	}
+	return 0;
 }
 
 void	rotate_min(t_list **a)

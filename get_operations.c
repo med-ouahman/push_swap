@@ -20,8 +20,7 @@ t_list	*get_operations(t_list *a, t_list *b, int current)
 	int		code;
 	t_pairs	pairs;
 
-	pairs.current = current;
-	pairs.prev = find_prev(b, current);
+	pairs = (t_pairs ){ .current = current, .prev = find_prev(b, current)};
 	if (is_end(b, current))
 		pairs.prev = max_of(b);
 	operations = NULL;
